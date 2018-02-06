@@ -46,13 +46,13 @@ WORKDIR  /build
 RUN git clone https://github.com/mxe/mxe.git
 
 # Build cross environment
-RUN cd mxe && make qtbase
+RUN cd mxe && make MXE_TARGETS=x86_64-w64-mingw32.static qtbase
 
 # Enhance path
 ENV PATH /build/mxe/usr/bin:$PATH
 
 # Add a qmake alias
-RUN ln -s /build/mxe/usr/bin/i686-w64-mingw32.static-qmake-qt5 /build/mxe/usr/bin/qmake
+RUN ln -s /build/mxe/usr/bin/x86_64-w64-mingw32.static-qmake-qt5 /build/mxe/usr/bin/qmake
 
 # Switch to the source directory. The source code will have to be mounted as a volume.
 RUN mkdir /src
